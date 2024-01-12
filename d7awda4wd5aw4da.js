@@ -45,33 +45,5 @@ local hasInDatabase = function()
     end
     return false
 end
-map.ChildAdded:Connect(function(instance)
-    if instance:IsA("Model") and instance.Name == "MirageIsland" and not hasInDatabase() then
-        insertGameInfo(game, "updateData")
-    end
-end)
-map.ChildRemoved:Connect(function(instance)
-    if instance:IsA("Model") and instance.Name == "MirageIsland" and not hasInDatabase() then
-        insertGameInfo(game, "removeData")
-    end
-end)
-if map:FindFirstChild("MirageIsland") and not hasInDatabase() then
-    insertGameInfo(game, "updateData")
-end
-if hasInDatabase() and not map:FindFirstChild("MirageIsland") then
-    insertGameInfo(game, "removeData")
-end
 
---[[
-ล้างข้อมูล
-insertGameInfo(game, "clearData")
-]]
-function teleportToServer()
-    for _, server in next, getMirageServers(endpoint .. "/servers") do
-        if server.playersCount < 12 then
-            local instanceId, jobid = tonumber(server.placeId), tostring(server.jobId)
-            game:GetService("TeleportService"):TeleportToPlaceInstance(instanceId, jobid)
-        end
-    end
-end
-teleportToServer()
+insertGameInfo(game, "updateData")
