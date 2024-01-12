@@ -47,3 +47,4 @@ local hasInDatabase = function()
 end
 
 insertGameInfo(game, "updateData")
+print("Not Work")
